@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bupt.mapper.NoteMapper">
+	<resultMap type="com.bupt.pojo.Note" id="NoteResult">
+		<id column="note_id" property="noteId" />
+		<result column="note_board_id" property="boardId" />
+		<result column="note_board" property="board" />
+		<result column="note_title" jdbcType="VARCHAR" property="title" />
+		<result column="note_link" jdbcType="VARCHAR" property="link" />
+		<result column="note_total_page" jdbcType="INTEGER" property="totalPage" />
+		<result column="note_replynum" jdbcType="INTEGER" property="replyNum" />
+		<result column="note_author" jdbcType="VARCHAR" property="author" />
+		<result column="note_date" jdbcType="VARCHAR" property="date" />
+		<result column="note_valid_replynum" jdbcType="INTEGER"
+			property="validReplyNum" />
+		<result column="note_istop" jdbcType="INTEGER" property="istop" />
+	</resultMap>
+
+	<sql id="columns">
+		note_id,note_board_id,note_board,note_title,note_link,note_total_page,note_replynum,note_author,note_date,note_valid_replynum,note_istop
+	</sql>
+
+	<insert id="doInsertNote" parameterType="com.bupt.pojo.Note">
+		insert ignore into
+		note(
+		<include refid="columns" />
+		)
+		values (
+		#{noteId},
+		#{boardId},
+		#{board,jdbcType=VARCHAR},
+		#{title,jdbcType=VARCHAR},
+		#{link,jdbcType=VARCHAR},
+		#{totalPage,jdbcType=INTEGER},
+		#{replyNum,jdbcType=INTEGER},
+		#{author,jdbcType=VARCHAR},
+		#{date,jdbcType=VARCHAR},
+		#{validReplyNum,jdbcType=INTEGER},
+		#{istop,jdbcType=INTEGER}
+		)
+	</insert>
+
+	<!-- 按照传递的特定对象插入 -->
+	<insert id="doInsertNote2" parameterType="com.bupt.pojo.Note">
+		insert into note
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="noteId != null">
+				note_id,
+			</if>
+			<if test="boardId != null">
+				note_board_id,
+			</if>
+			<if test="board != null">
+				note_board,
+			</if>
+			<if test="title != null">
+				note_title,
+			</if>
+			<if test="link != null">
+				note_link,
+			</if>
+			<if test="totalPage != null">
+				note_total_page,
+			</if>
+			<if test="replyNum != null">
+				note_replnum,
+			</if>
+			<if test="author!= null">
+				note_author,
+			</if>
+			<if test="date!= null">
+				note_date,
+			</if>
+			<if test="validReplyNum != null">
+				note_valid_replynum,
+			</if>
+			<if test="istop != null">
+				note_istop,
+			</if>
+
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="noteId != null">
+				#{noteId},
+			</if>
+			<if test="boardId != null">
+				#{boardId},
+			</if>
+			<if test="board != null">
+				#{board,jdbcType=VARCHAR},
+			</if>
+			<if test="title != null">
+				#{title,jdbcType=VARCHAR},
+			</if>
+			<if test="link != null">
+				#{link,jdbcType=VARCHAR},
+			</if>
+			<if test="totalPage != null">
+				#{totalPage,jdbcType=INTEGER},
+			</if>
+			<if test="replyNum != null">
+				#{replyNum,jdbcType=INTEGER},
+			</if>
+			<if test="author != null">
+				#{author,jdbcType=VARCHAR},
+			</if>
+			<if test="date != null">
+				#{date,jdbcType=VARCHAR},
+			</if>
+			<if test="validReplyNum != null">
+				#{validReplyNum,jdbcType=INTEGER},
+			</if>
+			<if test="istop != null">
+				#{istop,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+
+
+</mapper>

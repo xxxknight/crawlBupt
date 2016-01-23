@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bupt.mapper.BoardMapper">
+	<resultMap type="com.bupt.pojo.Board" id="BoardResult">
+		<id column="board_id" property="boardId" />
+		<result column="board_name" jdbcType="VARCHAR" property="name" />
+		<result column="board_title" jdbcType="VARCHAR" property="title" />
+		<result column="board_link" jdbcType="VARCHAR" property="link" />
+		<result column="board_admin" jdbcType="VARCHAR" property="admin" />
+		<result column="board_total_note" property="totalNote" />
+		<result column="board_total_article" property="totalArticle" />
+		<result column="board_section_id" property="sectionId" />
+		<result column="board_total_page" property="totalPage" />
+	</resultMap>
+
+	<sql id="columns">
+		board_id,board_name,board_title,board_link,board_admin,board_total_note,board_total_article,board_section_id,board_total_page
+	</sql>
+
+
+	<insert id="doInsertBoard" parameterType="com.bupt.pojo.Board">
+		replace into
+		board(
+		<include refid="columns" />
+		)
+		values (
+		#{boardId},
+		#{name},
+		#{title},
+		#{link},
+		#{admin},
+		#{totalNote},
+		#{totalArticle},
+		#{sectionId},
+		#{totalPage}
+		)
+	</insert>
+	
+	<!-- 根据指定id查询，多用于修改操作的前置查询 -->
+	<select id="getBoardsBySectionId" resultMap="BoardResult" parameterType="java.lang.Integer">
+		select
+		<include refid="columns" />
+		from board
+		where board_section_id = #{sectionId,jdbcType=INTEGER}
+	</select>
+
+	
+	
+
+</mapper>

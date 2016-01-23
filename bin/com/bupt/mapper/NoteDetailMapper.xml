@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bupt.mapper.NoteDetailMapper">
+
+	<resultMap type="com.bupt.pojo.NoteDetail" id="NoteDetailResult">
+		<id column="note_detail_id" property="detailId"/>
+		<result column="note_id"  property="noteId" />
+		<result column="note_url" jdbcType="VARCHAR" property="url" />
+		<result column="note_title" jdbcType="VARCHAR" property="title" />
+		<result column="note_pagenum" jdbcType="INTEGER" property="pageNum" />
+		<result column="note_content" jdbcType="VARCHAR" property="content" />
+	</resultMap>
+
+	<sql id="columns">
+		note_detail_id,note_id,note_url,note_title,note_pagenum,note_content
+	</sql>
+
+
+	<insert id="doInsertNoteDetail" parameterType="com.bupt.pojo.NoteDetail">
+		insert ignore into
+		note_detail(<include refid="columns" />)
+		values (
+		#{detailId},
+		#{noteId},
+		#{url,jdbcType=VARCHAR},
+		#{title,jdbcType=VARCHAR},
+		#{pageNum,jdbcType=INTEGER},
+		#{<![CDATA[content]]>,jdbcType=VARCHAR}
+		)
+	</insert>
+
+	<!-- 按照传递的特定对象插入 -->
+	<insert id="doInsertNoteDetail2" parameterType="com.bupt.pojo.NoteDetail">
+		insert into note_detail
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="detailId != null">
+				note_detail_id,
+			</if>
+			<if test="noteId != null">
+				note_id,
+			</if>
+			<if test="url != null">
+				note_url,
+			</if>
+			<if test="title != null">
+				note_title,
+			</if>
+			<if test="pageNum != null">
+				note_pagenum,
+			</if>
+			<if test="content != null">
+				note_content,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="detailId != null">
+				#{detailId},
+			</if>
+			<if test="noteId != null">
+				#{noteId},
+			</if>
+			<if test="url != null">
+				#{url,jdbcType=VARCHAR},
+			</if>
+			<if test="title != null">
+				#{title,jdbcType=VARCHAR},
+			</if>
+			<if test="pageNum != null">
+				#{pageNum,jdbcType=INTEGER},
+			</if>
+			<if test="content != null">
+				#{content,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+
+
+</mapper>
