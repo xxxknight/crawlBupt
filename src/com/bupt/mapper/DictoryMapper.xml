@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bupt.mapper.DictoryMapper">
+	<resultMap type="com.bupt.pojo.Dictory" id="DictoryResult">
+		<id column="dictory_id" property="id" />
+		<result column="dictory_key" jdbcType="VARCHAR" property="key" />
+		<result column="dictory_value" jdbcType="VARCHAR" property="value" />
+		<result column="dictory_remark" jdbcType="VARCHAR" property="remark" />
+	</resultMap>
+
+
+	<update id="updateDictByKey" parameterType="com.bupt.pojo.Dictory">
+		update dictory set
+		dictory_value = #{value}
+		where dictory_key =
+		#{key}
+	</update>
+
+</mapper>

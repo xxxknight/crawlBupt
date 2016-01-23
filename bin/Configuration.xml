@@ -23,7 +23,7 @@
       </transactionManager>
       <dataSource type="POOLED">
         <property name="driver" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://localhost:3306/bupt?useUnicode=true"/>
+        <property name="url" value="jdbc:mysql://127.0.0.1:3306/bupt?useUnicode=true"/>
         <property name="username" value="root"/>
         <property name="password" value="123456"/>
       </dataSource>
@@ -34,6 +34,7 @@
     <mapper resource="com/bupt/mapper/NoteDetailMapper.xml"/>
      <mapper resource="com/bupt/mapper/NoteMapper.xml"/>
      <mapper resource="com/bupt/mapper/BoardMapper.xml"/>
+      <mapper resource="com/bupt/mapper/DictoryMapper.xml"/>
   </mappers>
 
 </configuration>
